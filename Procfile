@@ -1,1 +1,1 @@
-web:gunicorn uims-backend.wsgi --log-file -
+web : gunicorn uims-backend.wsgi --log-file -
