@@ -1,5 +1,7 @@
 asgiref==3.5.2
 bleach==5.0.1
+cloudinary
+cloudinary_storage
 dj-database-url==1.0.0
 Django==3.2.9
 django-cors-headers==3.13.0

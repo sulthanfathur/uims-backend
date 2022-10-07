@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django_summernote',
     'homepage',
     'whitenoise.runserver_nostatic',
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 MIDDLEWARE = [
@@ -175,3 +177,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Cloudinary storage for image uploads
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dsgcv7moo',
+    'API_KEY': '578415741716422',
+    'API_SECRET': 'u-TRRFGhPg-W-qEJxmGXmUp2znY',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
