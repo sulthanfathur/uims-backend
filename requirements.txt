@@ -1,9 +1,9 @@
 asgiref==3.5.2
 bleach==5.0.1
 cloudinary
-cloudinary_storage
 dj-database-url==1.0.0
 Django==3.2.9
+django-cloudinary-storage
 django-cors-headers==3.13.0
 django-summernote==0.8.20.0
 djangorestframework==3.13.1
