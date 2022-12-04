@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
-class HomepageConfig(AppConfig):
+class TeamConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'homepage'
+    name = 'team'

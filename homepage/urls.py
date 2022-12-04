@@ -5,5 +5,4 @@ urlpatterns = [
     path('', NewsPostListView.as_view()),
     path('featured', NewsPostFeaturedView.as_view()),
     path('<slug>', NewsPostDetailView.as_view()),
-    path('team/', TeamMemberListView.as_view())
 ]

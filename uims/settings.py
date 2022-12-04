@@ -32,7 +32,7 @@ STAGING = os.environ.get("STAGING", False) == "true"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "uims-backend.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "uims-backend.up.railway.app"]
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_summernote',
     'homepage',
+    'team',
     'whitenoise.runserver_nostatic',
     "cloudinary",
     "cloudinary_storage",
@@ -168,6 +169,10 @@ REST_FRAMEWORK = {
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+    'attachment_filesize_limit': 5000*1024, # specify the file size
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 

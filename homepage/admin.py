@@ -11,5 +11,3 @@ class NewsPostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content', )
 
 admin.site.register(NewsPost, NewsPostAdmin)
-admin.site.register(TeamMember)
-admin.site.register(TeamRole)
