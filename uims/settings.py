@@ -13,19 +13,20 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dkbsl64(175-5s8@9692mopq9xlpqq!j9$g176pn&wba2-w$j('
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 PRODUCTION = os.environ.get("PRODUCTION", False) == "true"
 STAGING = os.environ.get("STAGING", False) == "true"
@@ -109,8 +110,8 @@ else:
         }
     }
 
-
-db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASE_URL = os.getenv("DATABASE_URL")
+db_from_env = dj_database_url.config(conn_max_age=1800)
 DATABASES['default'].update(db_from_env)
 
 
