@@ -9,9 +9,9 @@ from .serializers import TeamMemberSerializer
 class TeamListView(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request):
-        team_principal = TeamMember.objects.filter(jabatan="TEAM_PRINCIPAL")
+        team_principal = TeamMember.objects.filter(jabatan="TEAM PRINCIPAL")
         team_principal_serializer = TeamMemberSerializer(team_principal, many=True)
-        others = TeamMember.objects.filter(division="OTHERS").exclude(jabatan="TEAM_PRINCIPAL")
+        others = TeamMember.objects.filter(division="OTHERS").exclude(jabatan="TEAM PRINCIPAL")
         others_serializer = TeamMemberSerializer(
             others, many=True)
         response = {
@@ -24,30 +24,73 @@ class TeamListView(APIView):
 
 class GokartListView(ListAPIView):
     permission_classes = (permissions.AllowAny,)
+    def get(self, request):
+        gokart_team = TeamMember.objects.filter(division="GOKART")
+
+        cto = gokart_team.filter(jabatan="CTO")
+        cto_serializer = TeamMemberSerializer(cto, many=True)
+
+        managers = gokart_team.filter(jabatan="MANAGER")
+        managers_serializer = TeamMemberSerializer(managers, many=True)
+
+        mechanics = gokart_team.filter(jabatan="MECHANIC")
+        mechanics_serializer = TeamMemberSerializer(
+            mechanics, many=True)
+
+        response = {
+            "status": 200,
+            "message": "success",
+            "cto": cto_serializer.data,
+            "managers": managers_serializer.data,
+            "mechanics": mechanics_serializer.data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 class EVListView(ListAPIView):
-    queryset = TeamMember.objects.filter(division="EV")
-    serializer_class = TeamMemberSerializer
     permission_classes = (permissions.AllowAny,)
+    def get(self, request):
+        ev_team = TeamMember.objects.filter(division="EV")
+
+        cto = ev_team.filter(jabatan="CTO")
+        cto_serializer = TeamMemberSerializer(cto, many=True)
+
+        managers = ev_team.filter(jabatan="MANAGER")
+        managers_serializer = TeamMemberSerializer(managers, many=True)
+
+        mechanics = ev_team.filter(jabatan="MECHANIC")
+        mechanics_serializer = TeamMemberSerializer(
+            mechanics, many=True)
+
+        response = {
+            "status": 200,
+            "message": "success",
+            "cto": cto_serializer.data,
+            "managers": managers_serializer.data,
+            "mechanics": mechanics_serializer.data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
 
 class MarketingListView(ListAPIView):
-    queryset = TeamMember.objects.filter(division="MARKETING")
-    serializer_class = TeamMemberSerializer
     permission_classes = (permissions.AllowAny,)
 
-    # def get(self, request):
-    #     members = TeamMember.objects.all()
-    #     team_member_serializer = TeamMemberSerializer(
-    #         members, many=True)
-    #     response = {
-    #         "status": 200,
-    #         "message": "success",
-    #         "members": team_member_serializer.data,
-    #     }
-    #     return Response(response, status=status.HTTP_200_OK)
+    def get(self, request):
+        marketing_team = TeamMember.objects.filter(division="MARKETING")
 
-# class NewsPostFeaturedView(ListAPIView):
-#     queryset = NewsPost.objects.filter(featured=True)
-#     serializer_class = NewsPostSerializer
-#     lookup_field = 'slug'
-#     permission_classes = (permissions.AllowAny,)
+        cto = marketing_team.filter(jabatan="CTO")
+        cto_serializer = TeamMemberSerializer(cto, many=True)
+
+        managers = marketing_team.filter(jabatan="MANAGER")
+        managers_serializer = TeamMemberSerializer(managers, many=True)
+
+        staffs = marketing_team.filter(jabatan="STAFF")
+        staffs_serializer = TeamMemberSerializer(
+            staffs, many=True)
+
+        response = {
+            "status": 200,
+            "message": "success",
+            "cto": cto_serializer.data,
+            "managers": managers_serializer.data,
+            "staffs": staffs_serializer.data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
