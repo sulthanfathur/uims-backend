@@ -19,6 +19,7 @@ class TeamMember(models.Model):
     #    GOKART
     GOKART_550 = "GOKART 550"
     GOKART_551 = "GOKART 551"
+    RESEARCH_AND_DEVELOPMENT = "RESEARCH & DEVELOPMENT"
     #    EV
     E_POWERTRAIN = "E-POWERTRAIN"
     VEHICLE = "VEHICLE"
@@ -32,6 +33,7 @@ class TeamMember(models.Model):
         (OTHERS, "Lainnya (Team Principal, Finance, Advisor, dll.)"),
         (GOKART_550, "Gokart 550"),
         (GOKART_551, "Gokart 551"),
+        (RESEARCH_AND_DEVELOPMENT, "Research & Development")
         (E_POWERTRAIN, "E-Powertrain"),
         (VEHICLE, "Vehicle"),
         (AERODYNAMICS, "Aerodynamics"),
