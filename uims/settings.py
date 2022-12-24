@@ -26,15 +26,18 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 PRODUCTION = os.environ.get("PRODUCTION", False) == "true"
 STAGING = os.environ.get("STAGING", False) == "true"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "uims-backend.up.railway.app"]
 
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:    
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -91,28 +94,34 @@ WSGI_APPLICATION = 'uims.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if PRODUCTION:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ.get("DATABASE_NAME"),
-            "USER": os.environ.get("DATABASE_USER"),
-            "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-            "HOST": os.environ.get("DATABASE_HOST"),
-            "PORT": os.environ.get("DATABASE_PORT"),
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-db_from_env = dj_database_url.config(conn_max_age=1800)
-DATABASES['default'].update(db_from_env)
+"""Railway Deployment Configuration"""
+# if PRODUCTION:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql_psycopg2",
+#             "NAME": os.environ.get("DATABASE_NAME"),
+#             "USER": os.environ.get("DATABASE_USER"),
+#             "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+#             "HOST": os.environ.get("DATABASE_HOST"),
+#             "PORT": os.environ.get("DATABASE_PORT"),
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#         }
+#     }
+# DATABASE_URL = os.getenv("DATABASE_URL")
+# db_from_env = dj_database_url.config(conn_max_age=1800)
+# DATABASES['default'].update(db_from_env)
+
+"""Render Deployment Configuration"""
+DATABASES = {
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/mysite', conn_max_age=600)}
+
 
 
 # Password validation
