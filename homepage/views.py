@@ -1,7 +1,12 @@
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .models import NewsPost
-from .serializers import NewsPostSerializer
+from .models import NewsPost, HomepageBanner
+from .serializers import NewsPostSerializer, HomepageBannerSerializer
+
+class HomepageView(ListAPIView):
+    queryset = HomepageBanner.objects.all()
+    serializer_class = HomepageBannerSerializer
+    permission_classes = (permissions.AllowAny,)
 
 class NewsPostListView(ListAPIView):
     queryset = NewsPost.objects.order_by('-date_created')

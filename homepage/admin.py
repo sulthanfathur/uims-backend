@@ -11,3 +11,10 @@ class NewsPostAdmin(SummernoteModelAdmin):
     summernote_fields = ('content', )
 
 admin.site.register(NewsPost, NewsPostAdmin)
+
+class HomepageBannerAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'image',
+    ]
+admin.site.register(HomepageBanner, HomepageBannerAdmin)

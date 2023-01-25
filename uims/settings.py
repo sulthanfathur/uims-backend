@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     'homepage',
     'team',
     'whitenoise.runserver_nostatic',
-    "cloudinary",
-    "cloudinary_storage",
+    'cloudinary',
+    'cloudinary_storage',
+    'sponsors',
 ]
 
 MIDDLEWARE = [

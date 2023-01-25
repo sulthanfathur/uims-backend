@@ -2,6 +2,18 @@ from django.db import models
 from datetime import datetime
 from django.template.defaultfilters import slugify
 
+class HomepageBanner(models.Model):
+    image = models.ImageField(upload_to="UIMS/homepage_banner")
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(HomepageBanner, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+
 class NewsPost(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField()
